@@ -1,4 +1,4 @@
-package com.wangqi.service.serviceImpl;
+package com.wangqi.service.Impl;
 
 import com.wangqi.dao.AreaDao;
 import com.wangqi.pojo.Area;

@@ -1,2 +1,4 @@
 /o2o/target
 /o2o/out
+# 忽略测试时未启tomcat时，logback配置文件读取不到${catalina.base},而在项目根目录下产生的日志
+o2o/catalina.base_IS_UNDEFINED
