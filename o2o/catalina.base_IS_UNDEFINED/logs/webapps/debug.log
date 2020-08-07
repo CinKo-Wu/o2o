@@ -1,0 +1,15 @@
+2020-08-07 14:58:39:790 [main] DEBUG com.wangqi.dao.ShopDao.insertShop - ==>  Preparing: insert into tb_shop (owner_id, area_id, shop_category_id, shop_name, shop_desc, shop_addr, phone, shop_img, priority, create_time, last_edit_time, enable_status, advice) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+2020-08-07 15:00:32:482 [main] DEBUG com.wangqi.dao.ShopDao.insertShop - ==>  Preparing: insert into tb_shop (owner_id, area_id, shop_category_id, shop_name, shop_desc, shop_addr, phone, shop_img, priority, create_time, last_edit_time, enable_status, advice) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+2020-08-07 15:00:32:514 [main] DEBUG com.wangqi.dao.ShopDao.insertShop - ==> Parameters: 1(Long), 1(Integer), 1(Long), 测试的店铺(String), test(String), test(String), test(String), null, null, 2020-08-07 15:00:32.157(Timestamp), 2020-08-07 15:00:32.157(Timestamp), 1(Integer), null
+2020-08-07 15:02:00:896 [main] DEBUG com.wangqi.dao.ShopDao.insertShop - ==>  Preparing: insert into tb_shop (owner_id, area_id, shop_category_id, shop_name, shop_desc, shop_addr, phone, shop_img, priority, create_time, last_edit_time, enable_status, advice) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+2020-08-07 15:02:00:931 [main] DEBUG com.wangqi.dao.ShopDao.insertShop - ==> Parameters: 1(Long), 1(Integer), 1(Long), 测试的店铺(String), test(String), test(String), test(String), null, null, 2020-08-07 15:02:00.57(Timestamp), 2020-08-07 15:02:00.57(Timestamp), 1(Integer), null
+2020-08-07 15:02:00:941 [main] DEBUG com.wangqi.dao.ShopDao.insertShop - <==    Updates: 1
+2020-08-07 15:04:11:107 [main] DEBUG com.wangqi.dao.ShopDao.insertShop - ==>  Preparing: insert into tb_shop (owner_id, area_id, shop_category_id, shop_name, shop_desc, shop_addr, phone, shop_img, priority, create_time, last_edit_time, enable_status, advice) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+2020-08-07 15:04:11:154 [main] DEBUG com.wangqi.dao.ShopDao.insertShop - ==> Parameters: 1(Long), 1(Integer), 1(Long), 测试的店铺2号(String), test(String), test(String), test(String), null, null, 2020-08-07 15:04:10.758(Timestamp), 2020-08-07 15:04:10.758(Timestamp), 1(Integer), null
+2020-08-07 15:04:11:158 [main] DEBUG com.wangqi.dao.ShopDao.insertShop - <==    Updates: 1
+2020-08-07 15:25:39:086 [main] DEBUG com.wangqi.dao.ShopDao.updateShop - ==>  Preparing: update tb_shop SET shop_desc=?, shop_addr=? where shop_id=? 
+2020-08-07 15:25:39:118 [main] DEBUG com.wangqi.dao.ShopDao.updateShop - ==> Parameters: 测试描述(String), 测试地址(String), 1(Long)
+2020-08-07 15:25:39:124 [main] DEBUG com.wangqi.dao.ShopDao.updateShop - <==    Updates: 1
+2020-08-07 15:38:14:229 [main] DEBUG com.wangqi.dao.ShopDao.updateShop - ==>  Preparing: update tb_shop SET shop_desc=?, shop_addr=?, last_edit_time=? where shop_id=? 
+2020-08-07 15:38:14:277 [main] DEBUG com.wangqi.dao.ShopDao.updateShop - ==> Parameters: 测试描述(String), 测试地址(String), 2020-08-07 15:38:13.862(Timestamp), 1(Long)
+2020-08-07 15:38:14:282 [main] DEBUG com.wangqi.dao.ShopDao.updateShop - <==    Updates: 1
