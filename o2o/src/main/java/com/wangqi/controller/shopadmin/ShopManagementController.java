@@ -21,7 +21,9 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -64,11 +66,66 @@ public class ShopManagementController {
         }
         //2.注册店铺
         if (shop != null && shopImg != null) {
-            PersonInfo owner = new PersonInfo();
-            owner.setUserId(1L);
+            PersonInfo owner = (PersonInfo) request.getSession().getAttribute("user");
             shop.setOwner(owner);
             ShopExecution se = shopService.addShop(shop, ImageUtil.transferCommonsMultipartFileToFile(shopImg));
             if (se.getState() == ShopStateEnum.CHECK.getState()) {
+                modelMap.put("success", true);
+                //该用户可以操作的店铺列表
+                List<Shop> shopList = (List<Shop>) request.getSession().getAttribute("shopList");
+                if (shopList == null || shopList.size() == 0) {
+                    shopList = new ArrayList<Shop>();
+                }
+                shopList.add(se.getShop());
+                request.getSession().setAttribute("shopList", shopList);
+            } else {
+                modelMap.put("success", false);
+                modelMap.put("success", se.getStateInfo());
+                return modelMap;
+            }
+        } else {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", "请输入店铺信息");
+            return modelMap;
+        }
+        //3.返回结果
+        return modelMap;
+    }
+
+    @RequestMapping(value = "/modifyshop", method = RequestMethod.POST)
+    @ResponseBody
+    private Map<String, Object> modifyShop(HttpServletRequest request) {
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        //1.接受并转换相应的参数，可以不上传图片
+        if (!CodeUtil.checkVerifyCode(request)) {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", "输入了错误的验证码");
+            return modelMap;
+        }
+        String shopStr = HttpServletRequestUtil.getString(request, "shopStr");
+        ObjectMapper mapper = new ObjectMapper();
+        Shop shop = null;;
+        try{
+            shop = mapper.readValue(shopStr, Shop.class);
+        } catch (Exception e) {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", e.getMessage());
+            return modelMap;
+        }
+        CommonsMultipartFile shopImg = null;
+        CommonsMultipartResolver commonsMultipartResolver =
+                new CommonsMultipartResolver(request.getSession().getServletContext());
+        if (commonsMultipartResolver.isMultipart(request)) {
+            MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
+            shopImg = (CommonsMultipartFile) multipartHttpServletRequest.getFile("shopImg");
+        }
+        //2.修改店铺信息
+        if (shop != null && shop.getShopId() != null) {
+            PersonInfo owner = new PersonInfo();
+            owner.setUserId(1L);
+            shop.setOwner(owner);
+            ShopExecution se = shopService.modifyShop(shop, ImageUtil.transferCommonsMultipartFileToFile(shopImg));
+            if (se.getState() == ShopStateEnum.SUCCESS.getState()) {
                 modelMap.put("success", true);
             } else {
                 modelMap.put("success", false);

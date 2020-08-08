@@ -19,10 +19,20 @@ public class ShopServiceTest extends BaseTest {
     private ShopService shopService;
 
     @Test
+    public void testModifyShop() {
+        Shop shop = shopService.getByShopId(1L);//new Shop();
+        shop.setShopName("修改后的店铺名称2");
+        File fileImg = new File("E:/javaProjects/image/kedaya.PNG");
+        ShopExecution shopExecution = shopService.modifyShop(shop, fileImg);
+        System.out.println(shop);
+        System.out.println(shopExecution.getState());
+        System.out.println(shopExecution.getStateInfo());
+    }
+
+    @Test
     public void testAddShop() {
         Shop shop = new Shop();
         File fileImg = new File("E:/javaProjects/image/xiaohuangya.jpg");
-
 
         Area area = new Area();
         area.setAreaId(1);

@@ -42,10 +42,7 @@ public class ImageUtil {
             file = new File(cFile.getOriginalFilename());
             // 将cfile转换为file
             cFile.transferTo(file);
-        } catch (IllegalStateException e) {
-            logger.error(e.toString());
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (Exception e) {
             logger.error(e.toString());
             e.printStackTrace();
         }
@@ -77,7 +74,7 @@ public class ImageUtil {
             Thumbnails.of(thumbnail).size(200, 200)
                     .watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "/watermark.jpg")), 0.25f)
                     .outputQuality(0.8f).toFile(dest);
-        } catch (IOException e) {
+        } catch (Exception e) {
             logger.error(e.toString());
             e.printStackTrace();
             //此处图片记载失败则相对路径返回null，不进行修改。或者在这里也抛一个runtime异常出去？
@@ -119,6 +116,24 @@ public class ImageUtil {
         return nowTimeStr + rannum;
     }
 
+    /**
+     * storePath判断是文件还是目录路径，
+     * 如果storePath是文件路径则删除该文件，
+     * 如果是目录路径则删除该目录下的所有文件。
+     * @param storePath
+     */
+    public static void deleteFileOrPath(String storePath) {
+        File fileOrPath = new File(PathUtil.getImgBasePath() + storePath);
+        if (fileOrPath.exists()) {
+            if (fileOrPath.isDirectory()) {
+                File file[] = fileOrPath.listFiles();
+                for (int i = 0; i < file.length; i++)
+                    file[i].delete();
+            }
+            fileOrPath.delete();
+        }
+
+    }
 
     public static void main(String[] args) throws IOException {
         Thumbnails.of(new File("E:/javaProjects/image/xiaohuangya.jpg")).size(200,200)

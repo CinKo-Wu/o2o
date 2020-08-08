@@ -3,6 +3,14 @@ package com.wangqi.dao;
 import com.wangqi.pojo.Shop;
 
 public interface ShopDao {
+
+    /**
+     * 通过shopId查询店铺
+     * @param shopId
+     * @return
+     */
+    Shop queryByShopId(Long shopId);
+
     /**
      * 新增店铺
      * @param shop
