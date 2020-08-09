@@ -7,17 +7,17 @@ public class ProductCategory {
     private Long shopId;
     private String productCategoryName;
     private Integer priority;
-    private Date CreateTIme;
+    private Date createTime;
 
     public ProductCategory() {
     }
 
-    public ProductCategory(Long productCategoryId, Long shopId, String productCategoryName, Integer priority, Date createTIme) {
+    public ProductCategory(Long productCategoryId, Long shopId, String productCategoryName, Integer priority, Date createTime) {
         this.productCategoryId = productCategoryId;
         this.shopId = shopId;
         this.productCategoryName = productCategoryName;
         this.priority = priority;
-        CreateTIme = createTIme;
+        this.createTime = createTime;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class ProductCategory {
                 ", shopId=" + shopId +
                 ", productCategoryName='" + productCategoryName + '\'' +
                 ", priority=" + priority +
-                ", CreateTIme=" + CreateTIme +
+                ", createTime=" + createTime +
                 '}';
     }
 
@@ -63,12 +63,12 @@ public class ProductCategory {
         this.priority = priority;
     }
 
-    public Date getCreateTIme() {
-        return CreateTIme;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreateTIme(Date createTIme) {
-        CreateTIme = createTIme;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }
 

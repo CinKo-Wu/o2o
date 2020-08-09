@@ -121,7 +121,9 @@ public class ShopManagementController {
         }
         //2.注册店铺
         if (shop != null && shopImg != null) {
-            PersonInfo owner = (PersonInfo) request.getSession().getAttribute("user");
+            PersonInfo owner = new PersonInfo();
+            owner.setUserId(1L);
+            //PersonInfo owner = (PersonInfo) request.getSession().getAttribute("user");
             shop.setOwner(owner);
             ShopExecution se = shopService.addShop(shop, ImageUtil.transferCommonsMultipartFileToFile(shopImg));
             if (se.getState() == ShopStateEnum.CHECK.getState()) {

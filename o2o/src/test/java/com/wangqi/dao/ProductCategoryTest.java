@@ -5,6 +5,8 @@ import com.wangqi.pojo.ProductCategory;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ProductCategoryTest extends BaseTest {
@@ -18,5 +20,14 @@ public class ProductCategoryTest extends BaseTest {
         for (ProductCategory productCategory : productCategoryList) {
             System.out.println(productCategory);
         }
+    }
+
+    @Test
+    public void testBatchInsertProductCategory() {
+        List<ProductCategory> productCategoryList = new ArrayList<ProductCategory>();
+        productCategoryList.add(new ProductCategory(null, 1L, "商品类别1", null, new Date()));
+        productCategoryList.add(new ProductCategory(null, 1L, "商品类别2", null, new Date()));
+        int effectedNum = productCategoryDao.batchInsertProductCategory(productCategoryList);
+        System.out.println("插入的行数为：" + effectedNum);
     }
 }
