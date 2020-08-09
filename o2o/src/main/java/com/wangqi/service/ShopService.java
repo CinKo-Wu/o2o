@@ -6,6 +6,14 @@ import com.wangqi.pojo.Shop;
 import java.io.File;
 
 public interface ShopService {
+    /**
+     * 根据shopCondition分页返回相应列表数据
+     * @param shopCondition
+     * @param rowIndex
+     * @param pageSize
+     * @return
+     */
+    ShopExecution getShopList(Shop shopCondition, int pageIndex, int pageSize);
 
     /**
      * 通过店铺id获取店铺信息

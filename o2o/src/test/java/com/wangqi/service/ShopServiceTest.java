@@ -19,6 +19,17 @@ public class ShopServiceTest extends BaseTest {
     private ShopService shopService;
 
     @Test
+    public void testGetShopList() {
+        Shop shopCondition = new Shop();
+        ShopCategory shopCategory = new ShopCategory();
+        shopCategory.setShopCategoryId(2L);
+        shopCondition.setShopCategory(shopCategory);
+        ShopExecution se = shopService.getShopList(shopCondition, 3, 2);
+        System.out.println("店铺列表数为：" + se.getShopList().size());
+        System.out.println("店铺总数为：" + se.getCount());
+    }
+
+    @Test
     public void testModifyShop() {
         Shop shop = shopService.getByShopId(1L);//new Shop();
         shop.setShopName("修改后的店铺名称2");

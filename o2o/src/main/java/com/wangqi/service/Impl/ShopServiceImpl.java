@@ -7,6 +7,7 @@ import com.wangqi.exceptions.ShopOperationException;
 import com.wangqi.pojo.Shop;
 import com.wangqi.service.ShopService;
 import com.wangqi.util.ImageUtil;
+import com.wangqi.util.PageCalculator;
 import com.wangqi.util.PathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,12 +15,28 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class ShopServiceImpl implements ShopService {
 
     @Autowired
     private ShopDao shopDao;
+
+    public ShopExecution getShopList(Shop shopCondition, int pageIndex, int pageSize) {
+        int rowIndex = PageCalculator.calculateRowIndex(pageIndex, pageSize);
+        List<Shop> shopList = shopDao.queryShopList(shopCondition, rowIndex, pageSize);
+        int count = shopDao.queryShopCount(shopCondition);
+        ShopExecution se = new ShopExecution();
+        if (shopList != null) {
+            se.setShopList(shopList);
+            se.setCount(count);
+        } else {
+            se.setState(ShopStateEnum.INNER_ERROR.getState());
+            se.setStateInfo(ShopStateEnum.INNER_ERROR.getStateInfo());
+        }
+        return se;
+    }
 
     public Shop getByShopId(long shopId) {
         return shopDao.queryByShopId(shopId);

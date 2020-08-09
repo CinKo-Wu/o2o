@@ -9,10 +9,28 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
+import java.util.List;
 
 public class ShopDaoTest extends BaseTest {
     @Autowired
     private ShopDao shopDao;
+
+    @Test
+    public void testQueryShopListAndCount() {
+        Shop shopCondition = new Shop();
+        PersonInfo owner = new PersonInfo();
+        ShopCategory shopCategory = new ShopCategory();
+        owner.setUserId(1L);
+        shopCategory.setShopCategoryId(2L);
+        shopCondition.setOwner(owner);
+        shopCondition.setShopCategory(shopCategory);
+        List<Shop> shops = shopDao.queryShopList(shopCondition, 0, 5);
+        for (Shop shop : shops) {
+            System.out.println(shop);
+        }
+        int i = shopDao.queryShopCount(shopCondition);
+        System.out.println("店铺总数" + i);
+    }
 
     @Test
     public void testQueryByShopId() {
