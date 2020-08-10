@@ -30,4 +30,16 @@ public class ProductCategoryTest extends BaseTest {
         int effectedNum = productCategoryDao.batchInsertProductCategory(productCategoryList);
         System.out.println("插入的行数为：" + effectedNum);
     }
+
+    @Test
+    public void testDeleteProductCategory() {
+        long shopId = 1L;
+        List<ProductCategory> productCategoryList = productCategoryDao.queryProductCategoryList(shopId);
+        for (ProductCategory productCategory : productCategoryList) {
+            if("商品类别1".equals(productCategory.getProductCategoryName()) || "商品类别2".equals(productCategory.getProductCategoryName())) {
+                int effectedNum = productCategoryDao.deleteProductCategory(productCategory.getProductCategoryId(), shopId);
+                System.out.println("删除操作影响的行数量：" + effectedNum);
+            }
+        }
+    }
 }

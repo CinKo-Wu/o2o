@@ -23,4 +23,13 @@ public interface ProductCategoryService {
      */
     public ProductCategoryExection batchAddProductCategory(List<ProductCategory> productCategoryList)
             throws ProductCategoryOperationException;
+
+    /**
+     * 将此类别下的商品里的类别id置为空，再删掉该商品类别
+     * @param productCategoryId
+     * @param shopId
+     * @return
+     * @throws ProductCategoryOperationException
+     */
+    public ProductCategoryExection deleteProductCategory(long productCategoryId, long shopId) throws ProductCategoryOperationException;
 }

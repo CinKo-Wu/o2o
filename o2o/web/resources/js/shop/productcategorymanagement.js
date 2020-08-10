@@ -68,4 +68,36 @@ $(function() {
             }
         });
     });
+
+    //将点击事件绑定到新增条目的删除按钮上
+    $('.category-wrap').on('click', '.row-product-category.temp .delete',
+        function(e) {
+            console.log($(this).parent().parent());
+            //直接移除这一行数据
+            $(this).parent().parent().remove();
+        });
+
+    //将点击事件绑定到原始条目的删除按钮上
+    $('.category-wrap').on('click', '.row-product-category.now .delete',
+        function(e) {
+            var target = e.currentTarget;
+            $.confirm('确定么?', function() {
+                $.ajax({
+                    url : deleteUrl,
+                    type : 'POST',
+                    data : {
+                        productCategoryId : target.dataset.id
+                    },
+                    dataType : 'json',
+                    success : function(data) {
+                        if (data.success) {
+                            $.toast('删除成功！');
+                            getList();
+                        } else {
+                            $.toast('删除失败！');
+                        }
+                    }
+                });
+            });
+        });
 });
