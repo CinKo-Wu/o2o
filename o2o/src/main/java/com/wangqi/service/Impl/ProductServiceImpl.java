@@ -37,12 +37,12 @@ public class ProductServiceImpl implements ProductService {
      *
      * @param product
      * @param thumbnail      缩略图
-     * @param thumbnailList 详情图
+     * @param productImgList 详情图
      * @return
      * @throws ProductOperationException
      */
     @Transactional
-    public ProductExecution addProduct(Product product, File thumbnail, List<File> thumbnailList) throws ProductOperationException {
+    public ProductExecution addProduct(Product product, File thumbnail, List<File> productImgList) throws ProductOperationException {
         // 空值判断
         if (product != null && product.getShop() != null && product.getShop().getShopId() != null) {
             // 给商品设置上默认属性
@@ -63,8 +63,8 @@ public class ProductServiceImpl implements ProductService {
             } catch (Exception e) {
                 throw new ProductOperationException("创建商品失败" + e.toString());
             }
-            if (thumbnailList != null && thumbnailList.size() > 0) {
-                addProductImgList(product, thumbnailList);
+            if (productImgList != null && productImgList.size() > 0) {
+                addProductImgList(product, productImgList);
             }
                 return new ProductExecution(ProductStateEnum.SUCCESS, product);
         } else {

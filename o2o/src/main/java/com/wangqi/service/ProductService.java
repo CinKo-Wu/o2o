@@ -18,5 +18,5 @@ public interface ProductService {
      * @return
      * @throws ProductOperationException
      */
-    ProductExecution addProduct(Product product, File thumbnail, List<File> thumbnailList) throws ProductOperationException;
+    ProductExecution addProduct(Product product, File thumbnail, List<File> productImgList) throws ProductOperationException;
 }
