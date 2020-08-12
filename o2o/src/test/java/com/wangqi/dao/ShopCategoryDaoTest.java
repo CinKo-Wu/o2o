@@ -14,12 +14,14 @@ public class ShopCategoryDaoTest extends BaseTest {
 
     @Test
     public void testQueryShopCategory() {
-        List<ShopCategory> shopCategoryList = shopCategoryDao.queryShopCategory(new ShopCategory());
-        System.out.println(shopCategoryList.size());
-        ShopCategory parent= new ShopCategory();
-        parent.setShopCategoryId(1L);
-        ShopCategory shopCategory = new ShopCategory();
-        shopCategory.setParent(parent);
-        System.out.println(shopCategoryDao.queryShopCategory(shopCategory).get(0).getShopCategoryName());
+        //List<ShopCategory> shopCategoryList = shopCategoryDao.queryShopCategory(new ShopCategory());
+        //System.out.println(shopCategoryList.size());
+        //ShopCategory parent= new ShopCategory();
+        //parent.setShopCategoryId(1L);
+        //ShopCategory shopCategory = new ShopCategory();
+        //shopCategory.setParent(parent);
+        //System.out.println(shopCategoryDao.queryShopCategory(shopCategory).get(0).getShopCategoryName());
+        //打印出parent_id为null（一级shop_category)的
+        System.out.println(shopCategoryDao.queryShopCategory(null));
     }
 }
