@@ -1,6 +1,7 @@
 package com.wangqi.service.Impl;
 
 import com.wangqi.dao.ProductCategoryDao;
+import com.wangqi.dao.ProductDao;
 import com.wangqi.dto.ProductCategoryExection;
 import com.wangqi.enums.ProductCategoryStateEnum;
 import com.wangqi.exceptions.ProductCategoryOperationException;
@@ -17,6 +18,9 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 
     @Autowired
     private ProductCategoryDao productCategoryDao;
+
+    @Autowired
+    private ProductDao productDao;
 
     public List<ProductCategory> getProductCategoryList(long shopId) {
         return productCategoryDao.queryProductCategoryList(shopId);
@@ -42,7 +46,16 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 
     @Transactional
     public ProductCategoryExection deleteProductCategory(long productCategoryId, long shopId) throws ProductCategoryOperationException {
-        // TODO 将此商品类别下的类别Id置为空
+        //解除tb_product里的商品和该商品类别的关联
+        try {
+            int effectedNum = productDao.updateProductCategoryToNull(productCategoryId);
+            if(effectedNum < 0) {
+                throw new RuntimeException("商品类别更新失败！");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("deleteProductCategory error： " + e.getMessage());
+        }
+        //删除该类别
         try {
             int effectedNum = productCategoryDao.deleteProductCategory(productCategoryId, shopId);
             if (effectedNum <= 0) {
@@ -54,6 +67,4 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
             throw  new ProductCategoryOperationException("deleteProductCategory error" + e.getMessage());
         }
     }
-
-
 }

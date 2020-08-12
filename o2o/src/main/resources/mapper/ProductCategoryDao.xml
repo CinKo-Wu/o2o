@@ -33,4 +33,5 @@
         and
         shop_id = #{ShopId}
     </delete>
+
 </mapper>

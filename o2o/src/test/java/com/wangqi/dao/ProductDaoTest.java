@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
+import java.util.List;
 
 public class ProductDaoTest extends BaseTest {
 
@@ -59,4 +60,50 @@ public class ProductDaoTest extends BaseTest {
         System.out.println(effectedNum);
     }
 
+    @Test
+    public void testQueryProductById() {
+        long productId = 1;
+        Product product = productDao.queryProductById(productId);
+        System.out.println("查询出的商品为：" + product);
+    }
+
+    @Test
+    public void testUpdateProduct() {
+        Product product = new Product();
+        ProductCategory pc = new ProductCategory();
+        Shop shop = new Shop();
+        shop.setShopId(1L);
+        pc.setProductCategoryId(2L);
+        product.setProductId(1L);
+        product.setShop(shop);
+        product.setProductName("第一个产品");
+        product.setLastEditTime(new Date());
+        product.setProductCategory(pc);
+        int effectedNum = productDao.updateProduct(product);
+        System.out.println("修改商品影响的行数为：" + effectedNum);
+    }
+
+    @Test
+    public void testQueryProductList() {
+        Product productCondition = new Product();
+        //分页查询，预期返回三条结果
+        List<Product> productList = productDao.queryProductList(productCondition, 0, 3);
+        for (Product product : productList) {
+            System.out.println(product);
+        }
+        int count = productDao.queryProductCount(productCondition);
+        System.out.println("一共符合条件的行数为：" + count);
+        productCondition.setProductName("测试");
+        productList = productDao.queryProductList(productCondition, 0, 3);
+        System.out.println(productList);
+        count = productDao.queryProductCount(productCondition);
+        System.out.println("一共符合条件的行数为：" + count);
+    }
+
+    @Test
+    public void testUpdateProductCategoryToNull() {
+        //将productCategoryId为2的商品类别下的商品的商品类别置为空
+        int effectedNum = productDao.updateProductCategoryToNull(2L);
+        System.out.println("受影响的行数为： " + effectedNum);
+    }
 }

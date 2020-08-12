@@ -6,6 +6,11 @@ import java.util.List;
 
 public interface ProductImgDao {
 
+    /**
+     * 获得店铺所对应所有详情图
+     * @param productId
+     * @return
+     */
     List<ProductImg> queryProductImgList(long productId);
 
     /**
@@ -18,7 +23,7 @@ public interface ProductImgDao {
     /**
      * 批量删除商品详情图片
      * @param productId
-     * @return
+     * @return 影响的行数
      */
     int deleteProductImgByProductId(long productId);
 }

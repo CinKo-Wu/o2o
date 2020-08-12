@@ -35,4 +35,18 @@ public class ProductImgDaoTest extends BaseTest {
         System.out.println(effectedNum);
     }
 
+    @Test
+    public void testDeleteProductImgByProductId() {
+        int effectedNum = productImgDao.deleteProductImgByProductId(6L);
+        System.out.println("删除的行数：" + effectedNum);
+    }
+
+    @Test
+    public void testQueryProductImgList() {
+        long productId = 1L;
+        List<ProductImg> productImgList = productImgDao.queryProductImgList(productId);
+        for (ProductImg productImg : productImgList) {
+            System.out.println(productImg);
+        }
+    }
 }
