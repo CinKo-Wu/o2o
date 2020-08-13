@@ -9,7 +9,7 @@ public interface ShopService {
     /**
      * 根据shopCondition分页返回相应列表数据
      * @param shopCondition
-     * @param rowIndex
+     * @param pageIndex
      * @param pageSize
      * @return
      */
